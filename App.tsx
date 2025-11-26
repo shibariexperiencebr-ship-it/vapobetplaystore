@@ -6,10 +6,14 @@ import Steps from './components/Steps';
 import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
+import TopBar from './components/TopBar';
+import SalesPopup from './components/SalesPopup';
+import StickyCTA from './components/StickyCTA';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 overflow-x-hidden">
+    <div className="min-h-screen bg-deep-slate text-slate-100 overflow-x-hidden">
+      <TopBar />
       <Navbar />
       <main>
         <Hero />
@@ -19,6 +23,8 @@ const App: React.FC = () => {
         <Pricing />
       </main>
       <Footer />
+      <SalesPopup />
+      <StickyCTA />
     </div>
   );
 };
