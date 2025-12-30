@@ -3,43 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAPO BET 365 - Hackeie o Sistema</title>
-    <meta name="description" content="Descubra a falha no algoritmo do E-Soccer e lucre em 12 minutos." />
+    <title>VAPO Soccer - Inteligência e Gestão Esportiva</title>
+    <meta name="description" content="Sinais estatísticos e gestão de banca para apostas mais conscientes." />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+              sans: ['Inter', 'ui-sans-serif', 'system-ui'],
               display: ['Montserrat', 'sans-serif'],
             },
             colors: {
               'neon-green': '#00FF94',
               'neon-green-dark': '#00CC76',
               'vip-gold': '#FFD700',
-              'cyber-purple': '#bd00ff',
               'deep-slate': '#020617',
               'surface': '#0f172a',
-              'glass': 'rgba(255, 255, 255, 0.03)',
             },
             boxShadow: {
-              'neon': '0 0 20px rgba(0, 255, 148, 0.4)',
-              'neon-strong': '0 0 35px rgba(0, 255, 148, 0.6)',
-              'gold': '0 0 20px rgba(255, 215, 0, 0.3)',
-            },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+              'neon': '0 0 20px rgba(0, 255, 148, 0.3)',
+              'neon-strong': '0 0 35px rgba(0, 255, 148, 0.5)',
             }
           }
         }
       }
     </script>
     <style>
-      /* Custom scrollbar for webkit */
+      /* Suavização de renderização premium */
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      
+      body {
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      }
+
       ::-webkit-scrollbar {
         width: 6px;
       }
@@ -52,9 +56,6 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #00FF94;
-      }
-      .pb-safe {
-        padding-bottom: env(safe-area-inset-bottom);
       }
     </style>
   <script type="importmap">
@@ -69,7 +70,7 @@
 }
 </script>
 </head>
-  <body class="bg-deep-slate text-white antialiased selection:bg-neon-green selection:text-black pb-20 md:pb-0">
+  <body class="bg-deep-slate text-white antialiased selection:bg-neon-green selection:text-black">
     <div id="root"></div>
   </body>
 </html>
