@@ -4,22 +4,19 @@ import Hero from './components/Hero';
 import AboutVapo from './components/AboutVapo';
 import Comparison from './components/Comparison';
 import Steps from './components/Steps';
-import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
-import TopBar from './components/TopBar';
-import SalesPopup from './components/SalesPopup';
-import StickyCTA from './components/StickyCTA';
 import TermsOfUse from './components/TermsOfUse';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
 
 export type View = 'home' | 'terms' | 'privacy' | 'contact';
+export type Language = 'pt' | 'en';
 
 const App: React.FC = () => {
   const [view, setView] = useState<View>('home');
+  const [lang, setLang] = useState<Language>('pt');
 
-  // Scroll to top when changing view
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [view]);
@@ -27,20 +24,19 @@ const App: React.FC = () => {
   const renderView = () => {
     switch (view) {
       case 'terms':
-        return <TermsOfUse onBack={() => setView('home')} />;
+        return <TermsOfUse lang={lang} onBack={() => setView('home')} />;
       case 'privacy':
-        return <PrivacyPolicy onBack={() => setView('home')} />;
+        return <PrivacyPolicy lang={lang} onBack={() => setView('home')} />;
       case 'contact':
-        return <Contact onBack={() => setView('home')} />;
+        return <Contact lang={lang} onBack={() => setView('home')} />;
       default:
         return (
           <>
-            <Hero />
-            <AboutVapo />
-            <Steps />
-            <Comparison />
-            <SocialProof />
-            <Pricing />
+            <Hero lang={lang} />
+            <AboutVapo lang={lang} />
+            <Steps lang={lang} />
+            <Comparison lang={lang} />
+            <Pricing lang={lang} />
           </>
         );
     }
@@ -48,14 +44,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-deep-slate text-slate-100 overflow-x-hidden">
-      {view === 'home' && <TopBar />}
-      <Navbar onNavigate={setView} currentView={view} />
+      <Navbar lang={lang} setLang={setLang} onNavigate={setView} currentView={view} />
       <main>
         {renderView()}
       </main>
-      <Footer onNavigate={setView} />
-      {view === 'home' && <SalesPopup />}
-      {view === 'home' && <StickyCTA />}
+      <Footer lang={lang} onNavigate={setView} />
     </div>
   );
 };

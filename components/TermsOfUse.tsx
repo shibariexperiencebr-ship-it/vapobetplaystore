@@ -1,54 +1,45 @@
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { Language } from '../App';
 
-interface Props {
-  onBack: () => void;
-}
+const content = {
+  pt: {
+    back: "Voltar para o Início",
+    title: "TERMOS DE USO",
+    update: "Última atualização: Maio de 2024",
+    sections: [
+      { h: "1. SOBRE A PLATAFORMA", p: "O VAPO eSoccer é uma plataforma informativa de análise estatística. O VAPO eSoccer não é uma casa de apostas." },
+      { h: "2. NATUREZA DO CONTEÚDO", p: "Os conteúdos têm caráter exclusivamente informativo. Não constituem garantia de lucro ou recomendação financeira." },
+      { h: "3. RISCO E RESPONSABILIDADE", p: "Apostas esportivas envolvem risco financeiro. O VAPO eSoccer não se responsabiliza por decisões tomadas pelo usuário." }
+    ]
+  },
+  en: {
+    back: "Back to Home",
+    title: "TERMS OF USE",
+    update: "Last updated: May 2024",
+    sections: [
+      { h: "1. ABOUT THE PLATFORM", p: "VAPO eSoccer is an informational statistical analysis platform. VAPO eSoccer is not a betting operator." },
+      { h: "2. CONTENT NATURE", p: "The contents are strictly informational. They do not constitute profit guarantees or financial advice." },
+      { h: "3. RISK AND RESPONSIBILITY", p: "Sports betting involves financial risk. VAPO eSoccer is not responsible for decisions made by the user." }
+    ]
+  }
+};
 
-const TermsOfUse: React.FC<Props> = ({ onBack }) => {
+const TermsOfUse: React.FC<{ lang: Language, onBack: () => void }> = ({ lang, onBack }) => {
+  const t = content[lang];
   return (
     <div className="pt-40 pb-20 px-4">
       <div className="max-w-3xl mx-auto">
-        <button 
-          onClick={onBack}
-          className="flex items-center gap-2 text-neon-green mb-8 hover:underline font-bold uppercase text-xs tracking-widest"
-        >
-          <ChevronLeft size={16} /> Voltar para o Início
-        </button>
-        
-        <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">TERMOS DE USO</h1>
-        <p className="text-slate-500 mb-12 font-medium">Última atualização: 20 de Maio de 2024</p>
-        
-        <div className="space-y-10 text-slate-300 leading-relaxed text-lg">
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">1. SOBRE A PLATAFORMA</h2>
-            <p>O VAPO Soccer é uma plataforma de conteúdo informativo e educacional, voltada à disponibilização de sinais informativos baseados em análise estatística, ferramentas de gestão de banca e acompanhamento de desempenho. ⚠️ <strong>O VAPO Soccer não é uma casa de apostas.</strong></p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">2. NÃO INTERMEDIAÇÃO DE APOSTAS</h2>
-            <p>O usuário reconhece que o VAPO Soccer não realiza apostas, não intermedia apostas e não recebe ou movimenta valores para tal. Todas as decisões são de inteira responsabilidade do usuário.</p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">3. NATUREZA DO CONTEÚDO</h2>
-            <p>Os conteúdos têm caráter exclusivamente informativo. Não constituem promessa de lucro, garantia de resultado ou recomendação financeira. Resultados passados não garantem resultados futuros.</p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">4. RISCO E RESPONSABILIDADE</h2>
-            <p>Apostas esportivas envolvem risco financeiro. Podem ocorrer perdas. O VAPO Soccer não se responsabiliza por decisões tomadas pelo usuário ou prejuízos financeiros.</p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">5. IDADE MÍNIMA</h2>
-            <p>O uso da plataforma é restrito a maiores de 18 anos. Ao utilizar o serviço, você declara ter idade legal em sua jurisdição.</p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-black text-white mb-4 uppercase tracking-tight">6. CONTATO</h2>
-            <p>Dúvidas? Entre em contato pelo e-mail: <span className="text-neon-green">suporte@vaposoccer.com</span></p>
-          </section>
+        <button onClick={onBack} className="flex items-center gap-2 text-neon-green mb-8 uppercase text-xs font-black"><ChevronLeft size={16} /> {t.back}</button>
+        <h1 className="text-4xl font-black mb-2 tracking-tighter uppercase">{t.title}</h1>
+        <p className="text-slate-600 mb-12 font-bold text-xs uppercase">{t.update}</p>
+        <div className="space-y-12 text-slate-400 leading-relaxed font-medium">
+          {t.sections.map((s, i) => (
+            <section key={i}>
+              <h2 className="text-white font-black mb-4 text-lg uppercase tracking-tight">{s.h}</h2>
+              <p>{s.p}</p>
+            </section>
+          ))}
         </div>
       </div>
     </div>

@@ -1,52 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, Home } from 'lucide-react';
-import { View } from '../App';
+import { Lock, Home, Globe } from 'lucide-react';
+import { View, Language } from '../App';
 
 interface NavbarProps {
   onNavigate: (view: View) => void;
   currentView: View;
+  lang: Language;
+  setLang: (l: Language) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView, lang, setLang }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav className={`fixed top-10 left-0 w-full z-50 transition-all duration-500 ease-[0.22,1,0.36,1] ${isScrolled || currentView !== 'home' ? 'bg-slate-950/80 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2' : 'bg-transparent border-b border-transparent py-4'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || currentView !== 'home' ? 'bg-slate-950/90 backdrop-blur-xl border-b border-white/5 py-2' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div 
-            className="flex-shrink-0 transition-all duration-300 group cursor-pointer"
+            className="flex-shrink-0 cursor-pointer"
             onClick={() => onNavigate('home')}
           >
-            <span 
-              className={`font-display font-black text-2xl md:text-3xl tracking-tighter italic text-white transition-all duration-500 ${isScrolled ? 'drop-shadow-[0_0_25px_rgba(0,255,148,0.4)]' : ''}`}
-            >
-              VAPO<span className="text-neon-green group-hover:drop-shadow-[0_0_10px_rgba(0,255,148,0.8)] transition-all">SOCCER</span>
+            <span className="font-display font-black text-xl md:text-2xl tracking-tighter italic text-white uppercase">
+              VAPO<span className="text-neon-green">eSoccer</span>
             </span>
           </div>
           
           <div className="flex items-center gap-4">
-            {currentView !== 'home' && (
-              <button 
-                onClick={() => onNavigate('home')}
-                className="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-wider transition-colors"
-              >
-                <Home size={18} />
-                <span className="hidden md:inline">Início</span>
-              </button>
-            )}
-            <button className="group flex items-center gap-2 bg-white/5 hover:bg-neon-green text-white hover:text-deep-slate px-6 py-2.5 rounded-full text-xs md:text-sm font-bold tracking-wide transition-all duration-300 border border-white/10 hover:border-neon-green hover:shadow-[0_0_20px_rgba(0,255,136,0.4)]">
-              <Lock size={14} className="text-neon-green group-hover:text-deep-slate group-hover:scale-110 transition-transform duration-300" />
-              <span className="uppercase">Entrar no App</span>
+            <button 
+              onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
+              className="text-slate-400 hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-widest border border-white/10 px-3 py-1.5 rounded-full transition-all"
+            >
+              <Globe size={14} />
+              {lang === 'pt' ? 'EN' : 'PT'}
+            </button>
+
+            <button className="group flex items-center gap-2 bg-neon-green text-deep-slate px-5 py-2 rounded-full text-xs font-black tracking-wide transition-all hover:scale-105 uppercase">
+              <Lock size={14} />
+              {lang === 'pt' ? 'Entrar' : 'Login'}
             </button>
           </div>
         </div>

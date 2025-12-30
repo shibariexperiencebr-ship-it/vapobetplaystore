@@ -1,62 +1,66 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
+import { Language } from '../App';
 
-const Hero: React.FC = () => {
-  const easeCustom: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const content = {
+  pt: {
+    tag: "Estatísticas & Performance",
+    title: <>Acompanhe o <span className="text-neon-green italic">eSoccer</span> com dados reais</>,
+    desc: "Estatísticas, performance e organização para fãs de eSoccer que buscam decisões baseadas em dados.",
+    btn: "Entrar no App",
+    disclaimer: "Aplicativo informativo • Sem apostas • Sem promessas de lucro • 18+"
+  },
+  en: {
+    tag: "Statistics & Performance",
+    title: <>Track <span className="text-neon-green italic">eSoccer</span> with real data</>,
+    desc: "Statistics, performance, and organization for eSoccer fans who value data-driven decisions.",
+    btn: "Open the App",
+    disclaimer: "Informational app • No betting • No profit guarantees • 18+"
+  }
+};
 
+const Hero: React.FC<{ lang: Language }> = ({ lang }) => {
+  const t = content[lang];
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
-      <div className="absolute inset-0 z-0 bg-deep-slate">
-        <div className="absolute inset-0 bg-gradient-radial from-neon-green/10 via-deep-slate to-deep-slate opacity-70" />
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        
+    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-neon-green/5 to-transparent opacity-30" />
+      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }} 
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easeCustom }}
-          className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
+          className="mb-6 inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5"
         >
-          <span className="text-white text-[10px] font-bold uppercase tracking-[0.2em]">O App da sua Gestão</span>
+          <span className="text-white text-[10px] font-bold uppercase tracking-[0.2em]">{t.tag}</span>
         </motion.div>
-
+        
         <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: easeCustom }}
           className="font-display font-black text-5xl md:text-8xl leading-none text-white mb-6 tracking-tighter"
         >
-          Organize suas Apostas e Pare de <span className="text-neon-green italic">Perder o Controle</span>.
+          {t.title}
         </motion.h1>
-
+        
         <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: easeCustom }}
-          className="text-slate-300 text-lg md:text-2xl max-w-2xl mb-10 leading-relaxed font-medium"
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ delay: 0.2 }}
+          className="text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
         >
-          Ferramentas simples para você controlar seu dinheiro, ver estatísticas reais e ter disciplina todos os dias.
+          {t.desc}
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: easeCustom }}
-          className="flex flex-col items-center w-full"
-        >
-          <a href="#pricing" className="group relative w-full md:w-auto flex items-center justify-center gap-4 px-12 py-6 bg-neon-green rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-neon-strong shadow-neon">
-            <span className="text-deep-slate font-black text-xl uppercase tracking-tight italic">Garantir Meu Acesso</span>
-            <ArrowRight className="w-6 h-6 text-deep-slate group-hover:translate-x-1 transition-transform" />
-          </a>
+        
+        <div className="flex flex-col items-center">
+          <button className="group flex items-center gap-3 px-12 py-5 bg-neon-green text-deep-slate rounded-2xl font-black text-xl uppercase tracking-tight transition-all hover:scale-105 active:scale-95 shadow-neon">
+            {t.btn}
+            <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </button>
           
-          <div className="mt-8 flex flex-col items-center gap-2">
-            <p className="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-              ⚠️ Informativo • Sem promessas de lucro • 18+
-            </p>
-          </div>
-        </motion.div>
+          <p className="mt-8 text-slate-500 text-[10px] uppercase font-bold tracking-[0.2em] opacity-80">
+            {t.disclaimer}
+          </p>
+        </div>
       </div>
     </section>
   );
